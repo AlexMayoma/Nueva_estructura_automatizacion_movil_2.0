@@ -28,7 +28,7 @@ public class HU1Step {
 
     @When("ingrese correctamente el gt")
     public void ingrese_correctamente_el_gt() {
-
+        InicioDeSesionFuncion.waitTime(3000);
     }
 
     @Then("se debe poder visualizar un titulo referente al equipo")

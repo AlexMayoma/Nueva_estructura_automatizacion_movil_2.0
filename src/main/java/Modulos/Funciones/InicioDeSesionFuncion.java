@@ -24,6 +24,7 @@ public class InicioDeSesionFuncion {
                         Enter.keyValues(ingresocodigo).into(InicioDeSesionMap.CAMPO_INGRESAR_USUARIO)
                 );
     }
+
     public static Performable ingresoPassword(String contrasena1, String contrasena2, String contrasena3, String contrasena4) {
         return
                 Task.where("Ingresar un Contraseña",
@@ -41,10 +42,19 @@ public class InicioDeSesionFuncion {
                         Enter.keyValues(contrasena4).into(InicioDeSesionMap.TEXT_4)
                 );
     }
+
     // SIRVE PARA SELECCIONAR LAS OPCIONES DE LOS CAMPOS AUTO COMPLETABLES
     public static void seleccionDeUnItemEnCoordenadasEspecificas(int Data1, int Data2) {
         TouchAction touchAction = new TouchAction((PerformsTouchActions) AppiumAndroidDriver.driver);
         touchAction.tap(PointOption.point(Data1, Data2)).perform();
+    }
+
+    public static void waitTime(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
