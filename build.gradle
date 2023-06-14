@@ -1,4 +1,5 @@
-plugins id "net.serenity-bdd.serenity-gradle-plugin" version "3.5.1"
+plugins {
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.6.7"
     id 'java'
     id 'eclipse'
     id 'idea'
@@ -16,30 +17,50 @@ targetCompatibility = 1.8
 ext {
     slf4jVersion = '1.7.7'
     serenityCoreVersion = '3.6.21'
-    junitVersion = '5.8.2'
-    assertJVersion = '3.22.0'
-    logbackVersion = '1.2.10'
+    junitVersion = '5.9.2'
+    assertJVersion = '3.24.2'
+    logbackVersion = '1.4.7'
 }
 
 dependencies {
+    implementation 'net.serenity-bdd:serenity-cucumber:3.6.21'
+    implementation 'net.serenity-bdd:serenity-core:3.6.21'
+    implementation 'org.slf4j:slf4j-simple:2.0.5'
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.2'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
+    implementation group: 'io.appium', name: 'java-client', version: '8.3.0'
+    implementation group: 'org.aeonbits.owner', name: 'owner', version: '1.0.12'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.1'
     testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
-                "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
-                "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
-                "org.assertj:assertj-core:${assertJVersion}",
-                "ch.qos.logback:logback-classic:${logbackVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-}
-
-test {
-    useJUnitPlatform()
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
+            "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.assertj:assertj-core:${assertJVersion}",
+            "ch.qos.logback:logback-classic:${logbackVersion}"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:${junitVersion}"
 }
 
 gradle.startParameter.continueOnFailure = true
 
 test.finalizedBy(aggregate)
+
+// Para configurar propiedades del comando de ejecucion de pruebas con Gradle
+test {
+//Ignorar los fallos es ejecutar todas las pruebas asi alguna falle
+    ignoreFailures = false
+}
+// Configurar el encoding del proyecto
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Continue asi falle alguna tarea de Gradle
+gradle.startParameter.continueOnFailure = false
+
+//test {
+//    ignoreFailures = true
+//}

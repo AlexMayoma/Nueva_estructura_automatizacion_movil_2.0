@@ -1,4 +1,4 @@
-package starter;
+package runner;
 
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        plugin = {"pretty"},
-        features = "src/test/resources/features"
+        features = "src/test/java/NuevaEstructura/Sprint1/HU1.feature",
+        glue = "NuevaEstructura"
 )
-public class CucumberTestSuite {}
+public class Runner {}

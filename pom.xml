@@ -14,7 +14,7 @@
         <serenity.version>3.6.21</serenity.version>
         <encoding>UTF-8</encoding>
         <tags></tags>
-        <webdriver.base.url></webdriver.base.url>
+        <webdriver.base.url>http://127.0.0.1:4723/wd/hub</webdriver.base.url>
     </properties>
     <dependencies>
         <dependency>
